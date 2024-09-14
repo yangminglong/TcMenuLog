@@ -3,7 +3,6 @@
  * This product is licensed under an Apache license, see the LICENSE file in the top-level directory.
  */
 
-#include <TaskPlatformDeps.h>
 #include "TextUtilities.h"
 
 void appendChar(char* str, char val, int len) {
@@ -92,7 +91,7 @@ void fastftoa(char* sz, float fl, int dp, int strSize) {
     // multiply it up by decimal places to turn it into an int, then we can present it as "[-]whole.fraction"
     auto whole = (int32_t)fl;
     fl = fl - float(whole);
-    auto fraction = int32_t(fl * (float)dpToDivisor(dp));
+    auto fraction = int32_t((fl) * (float)dpToDivisor(dp));
 
     if(neg) appendChar(sz, '-', strSize);
     fastltoa(sz, whole, 9, NOT_PADDED, strSize);
