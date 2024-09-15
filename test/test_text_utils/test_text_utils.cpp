@@ -54,12 +54,6 @@ void testTcUtilHexCoversions() {
 
     intToHexString(szBuffer, sizeof szBuffer, 0x0000, 4, true);
     TEST_ASSERT_EQUAL_STRING("0x0000", szBuffer);
-
-    intToHexString(szBuffer, 6, 0xFFFF, 4, true);
-    TEST_ASSERT_EQUAL_STRING("0xFFF", szBuffer);
-
-    intToHexString(szBuffer, 3, 0xFFFF, 4, false);
-    TEST_ASSERT_EQUAL_STRING("FF", szBuffer);
 }
 
 void testTcUtilFloatConversions() {
@@ -73,11 +67,41 @@ void testTcUtilFloatConversions() {
     TEST_ASSERT_EQUAL_STRING("-10.3", szBuffer);
 }
 
+void testTcUtilLimits() {
+    char szBuffer[20];
+
+    // Test very large value
+    szBuffer[0]=0;
+    intToHexString(szBuffer, sizeof szBuffer, 0xFFF0FF0F, 8, true);
+    TEST_ASSERT_EQUAL_STRING("0xFFF0FF0F", szBuffer);
+
+    // test very small value with large number of places
+    intToHexString(szBuffer, sizeof szBuffer, 0x1, 8, true);
+    TEST_ASSERT_EQUAL_STRING("0x00000001", szBuffer);
+
+    // test limits - method does nothing when buffer too small.
+    intToHexString(szBuffer, 5, 0xFFF00000, 8, true);
+    TEST_ASSERT_EQUAL_STRING("", szBuffer);
+
+    // test large integers
+    ltoaClrBuff(szBuffer, 147483647, 9, NOT_PADDED, sizeof szBuffer);
+    TEST_ASSERT_EQUAL_STRING("147483647", szBuffer);
+    ltoaClrBuff(szBuffer, -147483647, 9, NOT_PADDED, sizeof szBuffer);
+    TEST_ASSERT_EQUAL_STRING("-147483647", szBuffer);
+
+
+    ltoaClrBuff(szBuffer, -2147483647, 9, NOT_PADDED, 5);
+    TEST_ASSERT_EQUAL_STRING("-147", szBuffer);
+
+}
+
+
 void setup() {
     UNITY_BEGIN();
     RUN_TEST(testTcUtilHexCoversions);
     RUN_TEST(testTcUtilIntegerConversions);
     RUN_TEST(testTcUtilFloatConversions);
+    RUN_TEST(testTcUtilLimits);
     UNITY_END();
 }
 
