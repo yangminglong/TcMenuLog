@@ -113,19 +113,26 @@ char hexChar(uint8_t val) {
 
 
 void intToHexString(char* buffer, size_t bufferSize, unsigned int input, int digits, bool with0x) {
+    buffer[0] = 0;
     if(with0x) {
+        if(bufferSize < (digits + 3)) {
+            return;
+        }
         buffer[0] = '0';
         buffer[1] = 'x';
         bufferSize -= 2;
         buffer += 2;
+    } else if(bufferSize < digits) {
+        return;
     }
 
     if(digits >= bufferSize) {
         digits = bufferSize - 1;
     }
 
-    int i = 0;
-    while(bufferSize && i < digits) {
+    size_t i = 0;
+    bufferSize--;
+    while(i < bufferSize && i < digits) {
         buffer[(digits-1) - i] = hexChar(input & 0x0f);
         input = input >> 4;
         i++;
