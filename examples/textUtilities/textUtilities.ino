@@ -8,6 +8,9 @@
  * This logging is only complied in when the above define is set, if it is not set then
  * the logging is completely removed.
  *
+ * Documentation link:
+ * https://tcmenu.github.io/documentation/arduino-libraries/io-abstraction/text-utilities-and-helpers/
+ * https://tcmenu.github.io/documentation/arduino-libraries//io-abstraction/arduino-logging-with-io-logging/
  */
 
 #include <IoLogging.h>
@@ -17,7 +20,7 @@ char sz[32] = {0};
 
 void setup() {
     // This example logs using IoLogging, see the following guide to enable
-    // https://www.thecoderscorner.com/products/arduino-libraries/io-abstraction/arduino-logging-with-io-logging/
+    // https://tcmenu.github.io/documentation/arduino-libraries//io-abstraction/arduino-logging-with-io-logging/
     IOLOG_START_SERIAL
 
     // convert 102934 to 8 decimal places not padded.

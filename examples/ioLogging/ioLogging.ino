@@ -8,6 +8,9 @@
  * 
  * This logging is only complied in when the above define is set, if it is not set then
  * the logging is completely removed.
+ *
+ * Full documentation is here:
+ * https://tcmenu.github.io/documentation/arduino-libraries//io-abstraction/arduino-logging-with-io-logging/
  */
 
 /* The logging levels are below:
