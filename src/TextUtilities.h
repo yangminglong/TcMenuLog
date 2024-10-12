@@ -135,11 +135,11 @@ inline float tcFltAbs(float f1) {
 #endif // MBED OR PICO
 
 #ifndef internal_min
-#define internal_min(a, b)  ((a) > (b) ? (b) : (a));
+#define internal_min(a, b)  ((a) > (b) ? (b) : (a))
 #endif // internal_min
 
 #ifndef internal_max
-#define internal_max(a, b)  ((a) < (b) ? (b) : (a));
+#define internal_max(a, b)  ((a) < (b) ? (b) : (a))
 #endif // internal_max
 
 #endif //IOABSTRACTION_TEXTUTILITIES_H
